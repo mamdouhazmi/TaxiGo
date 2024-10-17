@@ -39,7 +39,6 @@ dependencies:
   salomon_bottom_bar: ^3.3.2
   flutter_polyline_points: ^2.1.0
   badges: ^3.1.2
-  timeago: ^3.7.0
   image_picker: ^1.1.2
   image_cropper: ^8.0.2
   get: ^4.6.6
@@ -49,7 +48,12 @@ dependencies:
   flutter_dotenv: ^5.2.1
   screenshot: ^3.0.0
   flutter_screenutil: ^5.9.3
-
+  intl_phone_field: ^3.2.0
+  cached_network_image: ^3.3.1
+  country_pickers: ^3.0.1
+  connectivity_plus: ^6.0.4
+  url_launcher: ^6.0.17
+  timeago: ^3.7.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,9 +71,24 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
+    - assets/Vector.png
+    - assets/Vector0.png
+    - assets/Rectangle.png
     - assets/logo.png
     - assets/welcome.png
-
+    - assets/angle-left.png
+    - assets/gmail.png
+    - assets/facebook.png
+    - assets/apple.png
+  # fonts:
+  #   - family: Poppins
+  #     fonts:
+  #       - asset: assets/fonts/PoppinsSemiBold.ttf
+  #         weight: 600
+  #       - asset: assets/fonts/PoppinsMedium.ttf
+  #         weight: 500
+  #       - asset: assets/fonts/PoppinsRegular.ttf
+  #         weight: 400    
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
