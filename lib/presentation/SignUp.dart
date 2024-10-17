@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:taxigo/presentation/LogIn.dart'; // Ensure this path is correct
+import 'package:taxigo/presentation/PhoneVerificationScreen.dart';
+import 'package:taxigo/presentation/WelcomeScreen.dart';
 import 'package:url_launcher/url_launcher.dart'; // Make sure to import this
 
 class SignUpPage extends StatefulWidget {
@@ -17,14 +19,25 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Back', style: TextStyle(color: Color(0xFF2A2A2A))),
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF2A2A2A)),
+          icon: Image.asset('./assets/angle-left.png'),
           onPressed: () {
-            Navigator.of(context).pop(); // Added functionality to go back
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+            );
           },
+        ),
+        title: const Text(
+          'Back',
+          style: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            color: Color(0xFF414141),
+          ),
         ),
       ),
       body: Container(
@@ -187,7 +200,14 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          // Navigate to Log In page
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const PhoneVerificationScreen()),
+          );
+        },
         child: const Text(
           'Sign Up',
           style: TextStyle(

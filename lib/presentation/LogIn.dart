@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taxigo/presentation/SignUp.dart';
+import 'package:taxigo/presentation/WelcomeScreen.dart';
 // Ensure this path is correct
 import 'package:url_launcher/url_launcher.dart'; // Make sure to import this
 
@@ -18,12 +19,25 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Back', style: TextStyle(color: Color(0xFF2A2A2A))),
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF2A2A2A)),
-          onPressed: () => Navigator.of(context).pop(),
+          icon: Image.asset('./assets/angle-left.png'),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const WelcomeScreen()),
+            );
+          },
+        ),
+        title: const Text(
+          'Back',
+          style: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
+            color: Color(0xFF414141),
+          ),
         ),
       ),
       body: Container(
