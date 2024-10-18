@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:taxigo/presentation/Home.dart';
 // import 'package:taxigo/presentation/SplashScreen.dart';
 import 'package:taxigo/presentation/SplashScreen0.dart';
 
@@ -16,8 +17,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      debugShowCheckedModeBanner: false, 
-      home: SplashScreen0(), // Set the SplashScreen as the home widget
+      debugShowCheckedModeBanner: false,
+      home: const SplashScreen0(), // Set the SplashScreen as the home widget
     );
   }
 }

@@ -55,6 +55,9 @@ dependencies:
   url_launcher: ^6.0.17
   timeago: ^3.7.0
   flutter_otp_text_field: ^1.2.0
+  df_dropdown: ^1.0.6
+  google_maps_flutter: ^2.1.1
+
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +76,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
+    - assets/
     - assets/Vector.png
     - assets/Vector0.png
     - assets/Rectangle.png

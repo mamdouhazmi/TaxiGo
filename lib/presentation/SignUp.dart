@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:taxigo/presentation/LogIn.dart'; // Ensure this path is correct
 import 'package:taxigo/presentation/PhoneVerificationScreen.dart';
+import 'package:taxigo/presentation/SendVerificationPage.dart';
 import 'package:taxigo/presentation/WelcomeScreen.dart';
 import 'package:url_launcher/url_launcher.dart'; // Make sure to import this
 
@@ -205,7 +206,7 @@ class _SignUpPageState extends State<SignUpPage> {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const PhoneVerificationScreen()),
+                builder: (context) => SendVerificationPage()),
           );
         },
         child: const Text(

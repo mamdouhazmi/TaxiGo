@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:taxigo/presentation/ForgotPasswordPage.dart';
+import 'package:taxigo/presentation/ProfilePage.dart';
+import 'package:taxigo/presentation/ProfileScreen.dart';
 import 'package:taxigo/presentation/SignUp.dart';
 import 'package:taxigo/presentation/WelcomeScreen.dart';
-// Ensure this path is correct
-import 'package:url_launcher/url_launcher.dart'; // Make sure to import this
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _isPasswordHidden = true;
 
   @override
   Widget build(BuildContext context) {
@@ -51,10 +56,11 @@ class _LoginPageState extends State<LoginPage> {
                     color: Color(0xFF2A2A2A),
                     fontSize: 24,
                     fontWeight: FontWeight.bold)),
-            const SizedBox(height: 100), // Adjust based on your design
+            const SizedBox(height: 100),
             _buildTextField(
               controller: _emailController,
               label: 'Email or Phone Number',
+              isPassword: false,
             ),
             const SizedBox(height: 20),
             _buildTextField(
@@ -67,7 +73,11 @@ class _LoginPageState extends State<LoginPage> {
               alignment: Alignment.centerRight,
               child: InkWell(
                 onTap: () {
-                  // Handle forget password tap
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ForgotPasswordPage()),
+                  );
                 },
                 child: const Text(
                   'Forget password?',
@@ -81,26 +91,27 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             const SizedBox(height: 40),
-            _buildSignInButton(), // Uses the SignInButton code with appropriate label
+            _buildSignInButton(),
             const SizedBox(height: 20),
             _buildOrDivider(),
             const SizedBox(height: 20),
-            _buildSocialSignUpOptions(), // Social sign-in options
+            _buildSocialSignUpOptions(),
             const SizedBox(height: 20),
-            _buildAccountSignInOption(context), // Button to navigate to sign-up
+            _buildAccountSignInOption(context),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildTextField(
-      {required TextEditingController controller,
-      required String label,
-      bool isPassword = false}) {
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required bool isPassword,
+  }) {
     return TextField(
       controller: controller,
-      obscureText: isPassword,
+      obscureText: isPassword ? _isPasswordHidden : false,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
@@ -110,6 +121,19 @@ class _LoginPageState extends State<LoginPage> {
           fontFamily: 'Poppins',
           color: Color(0xFFD0D0D0),
         ),
+        suffixIcon: isPassword
+            ? IconButton(
+                icon: Icon(
+                  _isPasswordHidden ? Icons.visibility_off : Icons.visibility,
+                  color: Colors.grey,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isPasswordHidden = !_isPasswordHidden;
+                  });
+                },
+              )
+            : null,
       ),
     );
   }
@@ -127,6 +151,10 @@ class _LoginPageState extends State<LoginPage> {
         ),
         onPressed: () {
           // Handle sign-in logic here, potentially verify credentials
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const ProfileScreen()),
+          );
         },
         child: const Text(
           'Sign In',
@@ -264,30 +292,57 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  Widget _socialButton({required String iconPath, required String url}) {
+    return GestureDetector(
+      onTap: () async {
+        if (await canLaunchUrl(Uri.parse(url))) {
+          await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+        } else {
+          throw 'Could not launch $url';
+        }
+      },
+      child: Container(
+        width: 48,
+        height: 48,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              spreadRadius: 1,
+              blurRadius: 3,
+              offset: const Offset(0, 1),
+            ),
+          ],
+        ),
+        child: Image.asset(iconPath),
+      ),
+    );
+  }
+
   Widget _buildAccountSignInOption(BuildContext context) {
     return Center(
       child: TextButton(
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    const SignUpPage()), // Make sure SignUpPage is defined and imported
+            MaterialPageRoute(builder: (context) => const SignUpPage()),
           );
         },
         child: RichText(
           text: const TextSpan(
             style: TextStyle(
               fontFamily: 'Poppins',
-              fontSize: 16, // Adjust the font size to fit your design
-              color: Color(0xFF5A5A5A), // Default text color
+              fontSize: 16,
+              color: Color(0xFF5A5A5A),
             ),
             children: <TextSpan>[
               TextSpan(text: 'Don’t have an account? '),
               TextSpan(
                 text: 'Sign Up',
-                style: TextStyle(
-                    color: Color(0xFF1D1AD8)), // Blue color for 'Sign Up'
+                style: TextStyle(color: Color(0xFF1D1AD8)),
               ),
             ],
           ),
